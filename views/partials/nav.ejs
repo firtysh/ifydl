@@ -1,13 +1,33 @@
-<nav>
-    <label for="check" class="menubtn"><i class="fas fa-bars"></i></label>
-    <input type="checkbox" id="check" hidden>
-    <label class="logo">IFYdl</label>
-    <ul>
-        <li><a href="/" class="<% if (locals.path=="home") { %>active<% } %>"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="/download/youtube" class="<% if (locals.path=="youtube") { %>active<% } %>"><i class="fab fa-youtube"></i> YouTube</a></li>
-        <li><a href="/download/instagram" class="<% if (locals.path=="instagram") { %>active<% } %>"><i class="fab fa-instagram"></i> Instagram</a></li>
-        <li><a href="/download/facebook" class="<% if (locals.path=="facebook") { %>active<% } %>"><i class="fab fa-facebook"></i> FaceBook</a></li>
-        <li><a href="/download/instadp" class="<% if (locals.path=="instadp") { %>active<% } %>"><i class="fas fa-user-circle"></i> InstaDp</a></li>
-        <li><a href="/about" class="<% if (locals.path=="about") { %>active<% } %>"><i class="fas fa-address-card"></i> About</a></li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-md">
+        <a class="navbar-brand nav-title" href="/">IFYdl</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" style="flex-grow: unset;" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link <% if (locals.path==="youtube") { %>active<% } %>" href="/download/youtube"><i
+                                class="fab fa-youtube"></i> YouTube</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <% if (locals.path==="instagram") { %>active<% } %>" href="/download/instagram"><i
+                                class="fab fa-instagram"></i> Instagram</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <% if (locals.path==="facebook") { %>active<% } %>"
+                            href="/download/facebook"><i class="fab fa-facebook"></i> FaceBook</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <% if (locals.path==="instadp") { %>active<% } %>" href="/download/instadp"><i
+                                class="fas fa-user-circle"></i> Instadp</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link <% if (locals.path==="about") { %>active<% } %>" href="/about"><i
+                                class="fas fa-address-card"></i> about</a>
+                </li> -->
+            </ul>
+        </div>
+    </div>
 </nav>

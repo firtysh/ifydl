@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/firtysh/ifydl#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "dotenv": "^14.3.2",
     "ejs": "^3.1.6",
     "express": "^4.17.2",

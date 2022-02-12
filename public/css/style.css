@@ -1,4 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Mochiy+Pop+P+One&family=Ubuntu&display=swap");
+ @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Mochiy+Pop+P+One&family=Ubuntu&display=swap");
+*{
+  font-family: "Ubuntu", sans-serif;
+  transition-duration: 0.3s;
+}
+.nav-title{
+  font-family:"Mochiy Pop P One", sans-serif;
+  font-weight: bold;
+}
+
+footer{
+  font-family: "Indie Flower", cursive;
+  /* position: fixed;
+  bottom: 0; */
+}
+
+
+/*
 * {
   margin: 0;
   padding: 0;
@@ -7,7 +24,7 @@
   font-family: "Ubuntu", sans-serif;
   transition-duration: 0.3s;
 }
-/* #9e58ff */
+//#9e58ff
 :root {
   --nav-bg-color: #3632ff;
   --body-bg-color: #7429ff;
@@ -20,7 +37,7 @@ body {
   background-color: var(--nav-bg-color);
 }
 
-/* css for nav bar starts here */
+//css for nav bar starts here
 nav {
   background-color: var(--nav-bg-color);
   height: 80px;
@@ -91,9 +108,9 @@ a:hover {
   color: white;
   display: none;
 }
-/* css for nav bar ends here */
+//css for nav bar ends here
 
-/* css for form starts here*/
+//css for form starts here
 form {
   display: flex;
   flex-direction: column;
@@ -157,7 +174,7 @@ input[type="url"]{
   pointer-events: none;
   
 }
-/* css for form ends here*/
+//css for form ends here
 
 footer {
   width: 100%;
@@ -236,4 +253,5 @@ footer {
     padding: 10px 7px;
     font-size: 13px;
   }
-}
+} 
+ */
