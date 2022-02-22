@@ -1,21 +1,21 @@
 <div class="container">
-    <form> 
+    <form id="form"> 
         <div class="mb-3">
             <label for="url" class="form-label fs-3 fw-bold"><i class="fas fa-link"></i> Paste Your <% if (locals.path==="youtube") { %>Youtube Video Link <% } else if (locals.path==="instagram") { %>Instagram video/reel Link <% } else if (locals.path==="facebook") { %>Facebook Video Link<% } else if (locals.path==="instadp") { %>Instagram Profile Link<% } else  { %>Link<% } %> Below</label>
             <input type="url" class="form-control" id="url" name="url" onkeypress="return event.keyCode != 13;">
         </div>
         <div class="input-group mb-3" id="format-dropdown" hidden>
             <label class="input-group-text bg-primary text-light" for="format-sel">Choose Format</label>
-            <select class="form-select" id="format-sel">
-              <option value=0 selected>Choose...</option>
+            <select class="form-select" id="format-sel" name="itag">
             </select>
         </div>
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="button" id="submitbtn">Proceed</button>
-            <% if (locals.path==="youtube" || locals.path==="instagram") { %><button class="btn btn-primary" type="button" id="advbtn">Advanced</button> <% } %>
+            <% if (locals.path==="youtube") { %><button class="btn btn-primary" type="button" id="advbtn">Advanced</button> <% } %>
         </div> 
         <div id="image">
             
         </div>
+          
     </form>
 </div>

@@ -41,9 +41,8 @@ if (window.location.pathname == "/download/youtube") {
   };
   advbtn.onclick = function () {
     if (advbtn.innerHTML === "Advanced") {
-      if (url.value == "" || 1) {
-        alert("this feature is under development");
-        // alert("URL cannot be blank.");
+      if (url.value == "") {
+        alert("URL cannot be blank.");
       } else {
         subbtn.hidden = true;
         advbtn.classList.add("disabled");
@@ -63,6 +62,7 @@ if (window.location.pathname == "/download/youtube") {
             advbtn.classList.remove("disabled");
           } else if (this.status == 200) {
             const formats = JSON.parse(this.responseText);
+            form_sel.innerHTML ="<option value=999 selected>Choose...</option>";
             for (let i = 0; i < formats.length; i++) {
               let option = document.createElement("option");
               option.text = formats[i].format;
@@ -83,19 +83,10 @@ if (window.location.pathname == "/download/youtube") {
         xhr.send(`url=${url.value}`);
       }
     } else {
-      alert("This feature is under development");
-      /*const xhr = new XMLHttpRequest();
-      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-      xhr.onload = function () {
-        if (this.status == 400) {
-          alert("An error Occured");
-        } else if (this.status == 200) {
-
-        }
-      };
-      xhr.send(`url=${url.value}`);
-
-      console.log(form_sel.value); */
+      const frrm = document.getElementById('form');
+      frrm.method = 'POST';
+      frrm.action = '/download/youtube'
+      frrm.submit();
     }
   };
 } else if (window.location.pathname == "/download/instagram") {
@@ -116,7 +107,6 @@ if (window.location.pathname == "/download/youtube") {
           toggle_submit_btn();
           const ank = document.createElement("a");
           ank.href = JSON.parse(this.response)[1].url;
-          ank.download = "hello.mp4";
           ank.target = "_blank";
           document.body.appendChild(ank);
           ank.click();
@@ -126,9 +116,9 @@ if (window.location.pathname == "/download/youtube") {
       xhr.send(`url=${uri + "?__a=1"}`);
     }
   };
-  advbtn.onclick = function () {
-    alert("Still under development");
-  };
+  // advbtn.onclick = function () {
+  //   alert("Still under development");
+  // };
 } else if (window.location.pathname == "/download/instadp") {
   subbtn.onclick = function () {
     if (url.value == "") {
