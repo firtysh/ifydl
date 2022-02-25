@@ -5,8 +5,6 @@ const axios = require("axios");
 const { spawn } = require("child_process");
 const path = require("path");
 const router = express.Router();
-
-
 router
   .route("/youtube")
   .get((req, res) => {
@@ -14,10 +12,8 @@ router
   })
   .post(async (req, res) => {
     if (req.body.itag) {
-      console.log(req.body)
       try {
         const yturl = req.body.url.toString();
-        console.log(yturl)
         const itag = req.body.itag;
         const vid = ytdl.getURLVideoID(yturl);
         if (itag == "18") {
@@ -96,19 +92,36 @@ router
           },
         })
         .then(function (response) {
-          const vid_info = response.data.items[0].video_versions;
+          const vid_info = response.data?.items?.[0]?.video_versions?.[0]?.url || response.data?.graphql?.shortcode_media?.video_url;
           res.send(vid_info);
         })
-        .catch(function () {
+        .catch(function (e) {
+          console.log(e)
           res.status(400).send("Invalid URL");
         });
     } catch (error) {
+      console.log(error);
       res.status(400).send("Invalid URL");
     }
   });
-router.route("/facebook").get((req, res) => {
-  res.render("home", { path: "facebook" });
-});
+router.route("/facebook")
+  .get((req, res) => {
+    res.render("home", { path: "facebook" });
+  })
+  .post((req, res) => {
+    let uri;
+    axios.get(req.body.url).then(function (response) {
+      uri = response.request.res.responseUrl;
+      uri = uri.replace('www', 'mbasic');
+      axios.get(uri).then(function (fin_resp) {
+        res.send(fin_resp.data);
+      }).catch((er) => {
+        res.status(400).send('erroroccured');
+      })
+    }).catch((err) => {
+      res.status(400).send('error');
+    });
+  });
 router
   .route("/instadp")
   .get((req, res) => {
@@ -131,14 +144,17 @@ router
           }).then(function (resp) {
             res.set('content-type', 'image/jpg');
             resp.data.pipe(res);
-          }).catch(function () {
+          }).catch(function (err) {
+            console.log(err);
             res.status(400).send("Invalid URL");
           });
         })
         .catch(function (e) {
+          console.log(e)
           res.status(400).send("Invalid URL");
         });
     } catch (error) {
+      console.log(error);
       res.status(400).send("Invalid URL");
     }
   });

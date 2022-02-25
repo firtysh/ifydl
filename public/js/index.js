@@ -29,7 +29,7 @@ if (window.location.pathname == "/download/youtube") {
           toggle_submit_btn();
           const ank = document.createElement("a");
           ank.href = this.responseText;
-          ank.download = "hello.mp4";
+          ank.download = "video.mp4";
           ank.target = "_blank";
           document.body.appendChild(ank);
           ank.click();
@@ -94,7 +94,8 @@ if (window.location.pathname == "/download/youtube") {
     if (url.value == "") {
       alert("URL cannot be blank.");
     } else {
-      toggle_submit_btn();
+      subbtn.classList.add('disabled');
+      subbtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
       let uri = url.value.split("?")[0];
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "/download/instagram", true);
@@ -102,13 +103,15 @@ if (window.location.pathname == "/download/youtube") {
       xhr.onload = function () {
         if (this.status === 400) {
           alert(this.responseText);
-          toggle_submit_btn();
+          subbtn.classList.remove('disabled');
+          subbtn.innerHTML='Proceed';
         } else if (this.status === 200) {
-          toggle_submit_btn();
           const ank = document.createElement("a");
-          ank.href = JSON.parse(this.response)[1].url;
+          ank.href = this.response;
           ank.target = "_blank";
           document.body.appendChild(ank);
+          subbtn.classList.remove('disabled');
+          subbtn.innerHTML='Proceed';
           ank.click();
           ank.remove();
         }
@@ -116,9 +119,6 @@ if (window.location.pathname == "/download/youtube") {
       xhr.send(`url=${uri + "?__a=1"}`);
     }
   };
-  // advbtn.onclick = function () {
-  //   alert("Still under development");
-  // };
 } else if (window.location.pathname == "/download/instadp") {
   subbtn.onclick = function () {
     if (url.value == "") {
@@ -135,7 +135,6 @@ if (window.location.pathname == "/download/youtube") {
           alert("Ivalid URL");
           subbtn.classList.remove("disabled");
           subbtn.innerHTML= "Proceed";
-          
         } else if (this.status === 200) {
           subbtn.classList.remove("disabled");
           subbtn.innerHTML= "Proceed";
@@ -144,11 +143,44 @@ if (window.location.pathname == "/download/youtube") {
           let html = `<div class="d-grid gap-2 mt-3">
           <img src="${imageUrl}" class="rounded mx-auto d-block" alt="...">
           <a href="${URL.createObjectURL(this.response)}" class="btn btn-primary" target="_blank" download="profile.jpg" >Download</a>
-          </div>`
+          </div>`;
           document.getElementById('image').innerHTML = html;
         }
       };
       xhr.send(`url=${url.value + "?__a=1"}`);
     }
   };
+} else if (window.location.pathname == "/download/facebook"){
+  subbtn.onclick = function (){
+    if(url.value == ""){
+      alert('URL cannot be blank');
+    }
+    else{
+      subbtn.classList.add('disabled');
+      subbtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...';
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST','/download/facebook',true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.onload = function () {
+        if (this.status == 400) {
+          alert("Invalid Url");
+          subbtn.classList.remove('disabled');
+          subbtn.innerHTML='Proceed';
+        } else if (this.status == 200) {
+          const parser = new DOMParser();
+          const htmldom = parser.parseFromString(xhr.responseText,'text/html');
+          const vid_url = htmldom.head.querySelector("meta[property='og:video']" || "meta[property='og:video:url']" || "meta[property='og:video:secure_url']").getAttribute("content");
+          const ank = document.createElement("a");
+          ank.href = vid_url;
+          ank.target = "_blank";
+          document.body.appendChild(ank);
+          subbtn.classList.remove('disabled')
+          subbtn.innerHTML='Proceed';
+          ank.click();
+          ank.remove();
+        }
+      };
+      xhr.send(`url=${url.value}`);
+    }
+  }
 }

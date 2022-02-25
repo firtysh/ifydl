@@ -13,9 +13,6 @@ app.get("/", (req, res) => {
   res.redirect('/download/youtube');
 });
 app.use("/download", downloadRouter);
-// app.get("/about", (req, res) => {
-//   res.render("home", { path: "about" });
-// });
 app.get("*", (req, res) => {
   res.send("error page");
 });
