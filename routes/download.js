@@ -88,7 +88,7 @@ router
       axios
         .get(req.body.url, {
           headers: {
-            cookie: process.env.INSTA_SESSION_COOKIE,
+            Cookie: `sessionid=${process.env.INSTA_SESSION_COOKIE}`,
           },
         })
         .then(function (response) {
@@ -132,7 +132,7 @@ router
       axios
         .get(req.body.url, {
           headers: {
-            cookie: process.env.INSTA_SESSION_COOKIE,
+            Cookie: `sessionid=${process.env.INSTA_SESSION_COOKIE}`,
           },
         })
         .then(function (response) {
